@@ -22,25 +22,23 @@ return inquirer.prompt([
   ])
   .then(answer => {
       if (answer.menu === 'View all departments') {
-          return (db.query(`SELECT * FROM departments`, (err, data) =>
-              {
-              console.table(data)
-              return menu()
+        return (db.query(`SELECT * FROM departments`, (err, data) =>
+          {
+            console.table(data)
+            return
           }));
       }
       if (answer.menu === 'View all roles') {
-          console.log(true)
         return (db.query(`SELECT * FROM roles`, (err, data) =>
         {
         console.table(data)
-        return menu()
+        return
     }))}
     if (answer.menu === 'View all employees') {
-        console.log(true)
       return (db.query(`SELECT * FROM employees`, (err, data) =>
       {
       console.table(data)
-      return menu()
+      return
   }
     ));
   }   
@@ -58,62 +56,81 @@ return inquirer.prompt([
 if (answer.menu === 'Add a role') {
     inquirer.prompt([{ 
     type: 'input',
-    name: 'roleName',
-    message: 'Input role name'
+    name: 'roleTitle',
+    message: 'Input role title'
 },
 {
     type: 'input',
     name: 'roleSalary',
     message: 'Input role salary'
 },
-// {
-//   type: 'input',
-//   name: 'roleDept',
-//   message: 'Input the department name that this role is in'
-// }
+{
+  type: 'input',
+  name: 'roleDept',
+  message: 'Input the department number that this role is in'
+}
 ]).then(item => {
-      return (db.query(`INSERT INTO roles (title, salary) VALUES (?,?)`,[item.roleName, item.roleSalary,],(err, data) =>
+      return (db.query(`INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)`,[item.roleTitle, item.roleSalary, item.roleDept],(err, data) =>
       {
       return menu()
     }))
     })
 }
-// if (answer.menu === 'Add an employee') {
-//   inquirer.prompt([{ 
-//   type: 'input',
-//   name: 'firstName',
-//   message: 'Input first name'
-// },
-// {
-//   type: 'input',
-//   name: 'lastName',
-//   message: 'Input last name'
-// },
-// {
-//   type: 'input',
-//   name: 'roleName',
-//   message: 'Input role name'
-// },
-// {
-//   type: 'input',
-//   name: 'mgrName',
-//   message: 'Input manager name'
-// }]).then(item => {
-//     return (db.query(`INSERT INTO employees (first_name, last_name) VALUES (?,?)`, [item.firstName, item.lastName],(err, data) =>
-//     {
-//     return menu()
-//   }))
-//   })
-// }
-// if (answer.menu === 'DELETE an employee') {
-//   console.log(true)
-// return (db.query(`SELECT FROM employees WHERE id = ?`, (err, data) =>
-// {
-// console.table(data)
-// return menu()
-// }
-// ));
-// }
-});
-};
+if (answer.menu === 'Add an employee') {
+  inquirer.prompt([{ 
+  type: 'input',
+  name: 'firstName',
+  message: 'Input first name'
+},
+{
+  type: 'input',
+  name: 'lastName',
+  message: 'Input last name'
+},
+{
+  type: 'input',
+  name: 'roleID',
+  message: 'Input role ID'
+},
+{
+  type: 'input',
+  name: 'mgrID',
+  message: 'Input manager ID'
+}]).then(item => {
+    return (db.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`, [item.firstName, item.lastName, item.roleID, item.mgrID],(err, data) =>
+    {
+    return menu()
+  }))
+  })
+}
+if (answer.menu === 'Update an employee role') {
+  inquirer.prompt([{
+    type: 'input',
+    name: 'updateEmployee',
+    message: 'Input employee ID in order to update'
+  },
+  {
+    type: 'input',
+    name: 'updateRoleID',
+    message: `Input employee's new role ID`
+  }]).then(item => {
+return (db.query(`UPDATE employees SET role_id = (?) WHERE id = (?)`, [item.udpateEmployee, item.updateRoleID], (err, data) =>
+{
+return menu()
+}))
+})
+}
+if (answer.menu === 'DELETE an employee') {
+  inquirer.prompt([{
+    type: 'input',
+    name: 'employeeID',
+    message: 'Input employee ID to delete employee'
+  }]).then(item => {
+return (db.query(`DELETE FROM employees WHERE id = ?`, item.employeeID, (err, data) =>
+{
+return menu()
+}))
+})
+}}
+)}
 menu();
