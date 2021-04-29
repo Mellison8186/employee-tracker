@@ -1,2 +1,19 @@
-WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+# Employee Tracker
+
+## Purpose
+Command prompt app that tracks employees, their departments, and roles. It also allows for updating an employee and adding to all three object.
+
+## Built With
+* JavaScript
+* MySQL
+* Inquirer
+* console.table package
+
+## Video Demo Link
+https://drive.google.com/file/d/1mJLTaxToEuAlTL5wCrYxxzT2A_AVAW4Y/view
+
+## Website
+https://Mellison8186.github.io/run-buddy/
+
+## Contribution
+Made with ❤️ by Maribel Ellison
