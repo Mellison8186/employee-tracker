@@ -114,7 +114,7 @@ if (answer.menu === 'Update an employee role') {
     name: 'updateRoleID',
     message: `Input employee's new role ID`
   }]).then(item => {
-return (db.query(`UPDATE employees SET role_id = (?) WHERE id = (?)`, [item.udpateEmployee, item.updateRoleID], (err, data) =>
+return (db.query(`UPDATE employees SET role_id = ? WHERE id = ?`, [item.updateEmployee, item.updateRoleID], (err, data) =>
 {
 return menu()
 }))
