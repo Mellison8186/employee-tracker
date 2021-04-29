@@ -13,7 +13,7 @@ Command prompt app that tracks employees, their departments, and roles. It also 
 https://drive.google.com/file/d/1mJLTaxToEuAlTL5wCrYxxzT2A_AVAW4Y/view
 
 ## Website
-https://Mellison8186.github.io/run-buddy/
+https://mellison8186.github.io/employee-tracker/
 
 ## Contribution
 Made with ❤️ by Maribel Ellison
